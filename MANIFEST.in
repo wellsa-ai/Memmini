@@ -1,0 +1,22 @@
+include CHANGELOG.md
+include README.ko.md
+prune _docs
+prune .github
+prune .codegraph
+prune .pytest_cache
+prune scripts
+prune tests
+prune venv
+recursive-include examples *.py
+recursive-exclude * __pycache__ *.py[cod] .DS_Store
+recursive-exclude src *.egg-info/*
+exclude .coverage
+exclude coverage.xml
+exclude .codegraph.index.lock
+exclude .github-push-rules.md
+exclude .mcp.json
+exclude CODE_OF_CONDUCT.md
+exclude CODE_OF_CONDUCT.ko.md
+exclude CONTRIBUTING.md
+exclude CONTRIBUTING.ko.md
+exclude STATUS.md

@@ -1,0 +1,105 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "memmini"
+version = "0.4.0"
+description = "Layered L0/L1/L2 memory for AI agents"
+authors = [
+    {name = "Wellsa AI"}
+]
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+keywords = ["ai", "memory", "llm", "agent", "context", "layered-memory"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Operating System :: OS Independent",
+    "Typing :: Typed",
+]
+
+dependencies = [
+    "pydantic>=2.13.4",
+    "click>=8.4.1",
+    "python-dotenv>=1.2.2",
+]
+
+[project.optional-dependencies]
+vector = [
+    "chromadb>=1.5.9",
+    "sentence-transformers>=5.5.1",
+]
+
+memvid = [
+    "memvid-sdk>=2.0.160,<3.0",
+]
+
+dev = [
+    "chromadb>=1.5.9",
+    "sentence-transformers>=5.5.1",
+    "pytest>=9.0.3",
+    "pytest-asyncio>=1.3.0",
+    "pytest-cov>=7.1.0",
+    "black>=26.5.1",
+    "ruff>=0.15.16",
+    "mypy>=2.1.0",
+    "build>=1.5.0",
+    "twine>=6.2.0",
+]
+
+openclaw = [
+    # OpenClaw 어댑터 전용 (선택)
+]
+
+langchain = [
+    "langchain>=0.1.0",
+]
+
+autogen = [
+    "autogen>=0.2.0",
+]
+
+[project.scripts]
+memmini = "memmini.cli.commands:cli"
+
+[project.urls]
+Homepage = "https://github.com/wellsa-ai/Memmini"
+Documentation = "https://github.com/wellsa-ai/Memmini#readme"
+Repository = "https://github.com/wellsa-ai/Memmini"
+Issues = "https://github.com/wellsa-ai/Memmini/issues"
+Changelog = "https://github.com/wellsa-ai/Memmini/blob/main/CHANGELOG.md"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.black]
+line-length = 88
+target-version = ["py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+per-file-ignores = {"src/memmini/core/layer_generator.py" = ["N802"]}
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
